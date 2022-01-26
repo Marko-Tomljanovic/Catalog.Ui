@@ -1,46 +1,42 @@
 <template>
-  <b-container>
+  <b-container
+    ><div class="pt-3"></div>
     <b-card
       overlay
-      img-src="https://picsum.photos/900/250/?image=8"
+      img-src="https://picsum.photos/900/250/?image=24"
       img-alt="Card Image"
       text-variant="white"
       title="Knjigoteka"
-      class="pt-2"
-    >
-      <b-card-text>
-        Some quick example text to build on the card and make up the bulk of the
-        card's content.
-      </b-card-text>
+      ><b-button
+        variant="outline-info"
+        style="color: white"
+        class="float-right"
+        v-b-modal.modal-center
+        >PRIJAVI SE</b-button
+      >
+      <Prijava />
+      <b-card-text> Zamjeni knjigu s nekim ili prodaj. </b-card-text>
+      <b-button to="">DODAJ KNJIGU</b-button>
     </b-card>
     <FixKategorija
-      text="Razmjena knjiga"
-      slika="https://placekitten.com/300/300?image=1"
-    />
-    <FixKategorija
-      text="dora"
-      slika="https://placekitten.com/300/300?image=2"
-    />
-    <FixKategorija
-      text="marko"
-      slika="https://placekitten.com/300/300?image=3"
-    />
-    <FixKategorija
-      text="dora"
-      slika="https://placekitten.com/300/300?image=4"
-    />
-    <FixKategorija
-      text="marko"
-      slika="https://placekitten.com/300/300?image=5"
-    />
+      v-for="(card, idx) in kategorije.kat"
+      :key="idx"
+      :naslov="card.naslov"
+      :text="card.text"
+      :link="card.link"
+      :slika="card.slika"
+    ></FixKategorija>
   </b-container>
 </template>
 
 <script>
+import kategorije from '../store/kategorije'
 export default {
   name: 'IndexPage',
   data() {
-    return {}
+    return {
+      kategorije,
+    }
   },
 }
 </script>
