@@ -1,3 +1,3 @@
 <template>
-  <h1>bezveze</h1>
+  <div>nesto</div>
 </template>
