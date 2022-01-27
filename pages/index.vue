@@ -16,16 +16,19 @@
       >
       <Prijava />
       <b-card-text> Zamjeni knjigu s nekim ili prodaj. </b-card-text>
-      <b-button to="">DODAJ KNJIGU</b-button>
+      <b-button to="/novaknjiga">DODAJ KNJIGU</b-button>
     </b-card>
-    <FixKategorija
-      v-for="(card, idx) in kategorije.kat"
-      :key="idx"
-      :naslov="card.naslov"
-      :text="card.text"
-      :link="card.link"
-      :slika="card.slika"
-    ></FixKategorija>
+    <div class="row mx-auto">
+      <FixKategorija
+        class="mx-auto"
+        v-for="(card, idx) in kategorije.kat"
+        :key="idx"
+        :naslov="card.naslov"
+        :text="card.text"
+        :link="card.link"
+        :slika="card.slika"
+      ></FixKategorija>
+    </div>
   </b-container>
 </template>
 
