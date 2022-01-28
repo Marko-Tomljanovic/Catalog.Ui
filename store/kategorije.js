@@ -90,4 +90,19 @@ export default {
       slika: require('../assets/bookCard.jpg'),
     },
   ],
+  selected: null,
+  stanje: [
+    {
+      value: 'Bez vidljih oštećenja',
+      text: 'Bez vidljih oštećenja',
+    },
+    {
+      value: 'Dobro sa malim znakovima korištenja',
+      text: 'Dobro sa malim znakovima korištenja',
+    },
+    {
+      value: 'Vidljivo oštećena knjiga',
+      text: 'Vidljivo oštećena knjiga',
+    },
+  ],
 }

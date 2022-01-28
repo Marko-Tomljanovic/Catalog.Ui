@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink style="text-decoration: none" :to="link">
+  <NuxtLink style="text-decoration: none" :to="`/profil/${url}`">
     <b-card :img-src="slika" img-top class="mb-2 mt-3" style="max-width: 20rem">
       <b-card-text class="font-weight-bold" style="margin-top: -5px">
         {{ naslov }}
@@ -13,6 +13,6 @@
 
 <script>
 export default {
-  props: ['link', 'slika', 'naslov', 'text'],
+  props: ['url', 'slika', 'naslov', 'text'],
 }
 </script>

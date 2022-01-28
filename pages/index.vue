@@ -14,10 +14,12 @@
         v-b-modal.modal-center
         >PRIJAVI SE</b-button
       >
+
       <Prijava />
       <b-card-text> Zamjeni knjigu s nekim ili prodaj. </b-card-text>
       <b-button to="/novaknjiga">DODAJ KNJIGU</b-button>
     </b-card>
+    {{ info }} <br />
     <div class="row mx-auto">
       <FixKategorija
         class="mx-auto"
@@ -33,13 +35,21 @@
 </template>
 
 <script>
+import axios from 'axios'
 import kategorije from '../store/kategorije'
 export default {
   name: 'IndexPage',
   data() {
     return {
       kategorije,
+      info: null,
     }
+  },
+  mounted() {
+    axios
+      .get('http://10.42.206.52:3333/books')
+      .then((response) => (this.info = response.data))
+      .catch((error) => console.log(error))
   },
 }
 </script>
