@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <div class="main-body">
+    <div class="main-body mt-4">
       <b-form @submit="ucitaj">
         <div class="row gutters-sm">
           <div class="col-md-7 mb-3">
             <div class="card">
               <div class="card-body">
-                <div class="d-flex flex-column align-items-center text-center">
+                <div class="xd-flex flex-column align-items-center text-center">
                   <div class="contact-form">
                     <h5 class="mb-2" style="color: #2677a7">
                       UNOS NOVE KNJIGE
@@ -27,46 +27,35 @@
                     <div class="form-field col-lg-12 mx-auto">
                       <textarea
                         id="opis"
+                        v-model="opis"
                         class="input-text js-input"
                         type="text"
                         autocomplete="off"
                         required
                         style="height: 60px"
+                        maxlength="110"
                       ></textarea>
-                      <label class="label mb-4" for="opis">Opis</label>
+                      <label
+                        class="label"
+                        style="margin-bottom: 30px"
+                        for="opis"
+                        >Opis</label
+                      >
                     </div>
+                    <p class="text-muted text-left">
+                      Max {{ opis.length }}/110 znakova
+                    </p>
 
                     <div class="form-field col-lg-8 mx-auto">
                       <input
-                        id="adresa"
+                        id="cijena"
                         class="input-text js-input"
-                        type="text"
+                        type="number"
+                        placeholder="kn"
                         autocomplete="off"
                         required
                       />
-                      <label class="label" for="adresa">Adresa</label>
-                    </div>
-
-                    <div class="form-field col-lg-8 mx-auto">
-                      <input
-                        id="sluzbeniEmail"
-                        class="input-text js-input"
-                        type="email"
-                        required
-                      />
-                      <label class="label" for="sluzbeniEmail">E-mail</label>
-                    </div>
-
-                    <div class="form-field col-lg-8 mx-auto">
-                      <input
-                        id="oib"
-                        class="input-text js-input"
-                        type="tel"
-                        minlength="11"
-                        autocomplete="off"
-                        required
-                      />
-                      <label class="label" for="oib">OIB</label>
+                      <label class="label" for="cijena">Cijena</label>
                     </div>
                   </div>
                 </div>
@@ -76,19 +65,21 @@
           <div class="col-md-5">
             <div class="card">
               <div class="card-body">
-                <div class="d-flex flex-column align-items-center text-center">
+                <div class="flex-column align-items-center text-center">
                   <div class="contact-form">
                     <div class="contact-form row">
                       <b-dropdown
                         variant="dark"
-                        style="border-radius: 10px; margin-left: 5px"
+                        style="border-radius: 10px"
                         id="dropdown-form"
                         text="Stanje"
                         ref="dropdown"
-                        class="mb-4 col-11"
+                        class="mb-4 col-11 mx-auto"
                         ><b-form-group v-slot="{ ariaDescribedby }">
                           <b-form-checkbox-group
                             switches
+                            :options="kategorije.stanje"
+                            v-model="kategorije.selected"
                             :aria-describedby="ariaDescribedby"
                             class="ml-2"
                           >
@@ -96,68 +87,10 @@
                         ></b-form-group>
                       </b-dropdown>
                     </div>
-
-                    <div class="form-field col-lg-8 mx-auto mt-5">
-                      <input
-                        id="facebook"
-                        class="input-text js-input"
-                        type="url"
-                        autocomplete="off"
-                      />
-                      <label class="label" for="facebook">Facebook</label>
-                    </div>
-
-                    <div class="form-field col-lg-8 mx-auto mt-5">
-                      <input
-                        id="instagram"
-                        class="input-text js-input"
-                        type="url"
-                        autocomplete="off"
-                      />
-                      <label class="label" for="instagram">Instagram</label>
-                    </div>
-
-                    <div class="form-field col-lg-8 mx-auto mt-5">
-                      <input
-                        id="webStranica"
-                        class="input-text js-input"
-                        type="url"
-                        autocomplete="off"
-                      />
-                      <label class="label" for="instwebStranicaagram"
-                        >Web stranica</label
-                      >
-                    </div>
-
-                    <div class="form-field col-lg-8 mx-auto mt-5">
-                      <input
-                        id="youTube"
-                        class="input-text js-input"
-                        type="url"
-                        autocomplete="off"
-                      />
-                      <label class="label" for="youTube">You Tube</label>
-                    </div>
-
-                    <div class="form-field col-lg-8 mx-auto mt-5">
-                      <input
-                        id="tiktok"
-                        class="input-text js-input"
-                        type="url"
-                        autocomplete="off"
-                      />
-                      <label class="label" for="tiktok">TikTok</label>
-                    </div>
-
-                    <div class="form-field col-lg-8 mx-auto mt-5">
-                      <input
-                        id="twitter"
-                        class="input-text js-input"
-                        type="url"
-                        autocomplete="off"
-                      />
-                      <label class="label" for="twitter">Twitter</label>
-                    </div>
+                    <p class="text-muted">Odaberite stanje knjige</p>
+                    <p v-if="kategorije.selected" class="text-muted">
+                      Odabrano: {{ kategorije.selected }}
+                    </p>
 
                     <b-button type="submit" class="blue col-6 mt-4"
                       >POHRANI</b-button
@@ -174,11 +107,12 @@
 </template>
 
 <script>
+import kategorije from '@/store/kategorije'
 export default {
   name: 'noviIzvodac',
 
   data() {
-    return {}
+    return { kategorije, opis: '' }
   },
   methods: {
     ucitaj() {},
