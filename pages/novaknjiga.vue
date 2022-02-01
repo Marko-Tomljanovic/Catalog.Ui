@@ -16,6 +16,7 @@
                     <div class="form-field col-12 mx-auto mb-0">
                       <input
                         id="imeKnjige"
+                        v-model="nazivKnjige"
                         class="input-text js-input"
                         type="text"
                         autocomplete="off"
@@ -49,6 +50,7 @@
                     <div class="form-field col-lg-8 mx-auto">
                       <input
                         id="cijena"
+                        v-model="cijena"
                         class="input-text js-input"
                         type="number"
                         placeholder="kn"
@@ -75,12 +77,11 @@
                         text="Stanje"
                         ref="dropdown"
                         class="mb-4 col-11 mx-auto"
-                        ><b-form-group v-slot="{ ariaDescribedby }">
+                        ><b-form-group>
                           <b-form-checkbox-group
                             switches
                             :options="kategorije.stanje"
                             v-model="kategorije.selected"
-                            :aria-describedby="ariaDescribedby"
                             class="ml-2"
                           >
                           </b-form-checkbox-group
@@ -88,7 +89,7 @@
                       </b-dropdown>
                     </div>
                     <p class="text-muted">Odaberite stanje knjige</p>
-                    <p v-if="kategorije.selected" class="text-muted">
+                    <p class="text-muted">
                       Odabrano: {{ kategorije.selected }}
                     </p>
 
@@ -108,14 +109,29 @@
 
 <script>
 import kategorije from '@/store/kategorije'
+import axios from 'axios'
 export default {
   name: 'noviIzvodac',
 
   data() {
-    return { kategorije, opis: '' }
+    return { kategorije, nazivKnjige: '', opis: '', cijena: '' }
   },
   methods: {
-    ucitaj() {},
+    ucitaj() {
+      axios
+        .post('http://10.42.206.52:3333/books', {
+          naslov: this.nazivKnjige,
+          opis: this.opis,
+          cijena: this.cijena,
+          stanje: this.kategorije.selected,
+        })
+        .then(function (response) {
+          console.log(response)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
   },
 }
 </script>

@@ -19,7 +19,7 @@
       <b-card-text> Zamjeni knjigu s nekim ili prodaj. </b-card-text>
       <b-button to="/novaknjiga">DODAJ KNJIGU</b-button>
     </b-card>
-    {{ info }} <br />
+
     <div class="row mx-auto">
       <FixKategorija
         class="mx-auto"

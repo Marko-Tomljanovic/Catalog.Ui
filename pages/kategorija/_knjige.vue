@@ -22,6 +22,7 @@
           :naslov="card.naslov"
           :url="card.naslov.replace(/\s/g, '').toLowerCase()"
           :slika="card.slika"
+          :marko="card.naslov"
         ></Knjiga>
       </div>
     </div>
