@@ -27,7 +27,7 @@
       </b-form-group>
 
       <b-form-checkbox
-        v-model="checked"
+        v-model="xchecked"
         id="zapamtiMe"
         switch
         value="rememberMe"
@@ -54,7 +54,7 @@ export default {
     return {
       username: '',
       password: '',
-      checked: false,
+      xchecked: false,
     }
   },
 }

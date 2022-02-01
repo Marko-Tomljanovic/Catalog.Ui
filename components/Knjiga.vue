@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink style="text-decoration: none" :to="`/profil/${url}`">
+  <NuxtLink :to="`profil/${url}`">
     <b-card :img-src="slika" img-top class="mb-2 mt-3" style="max-width: 20rem">
       <b-card-text class="font-weight-bold" style="margin-top: -5px">
         {{ naslov }}
