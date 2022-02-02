@@ -121,11 +121,9 @@
 <script>
 import kategorije from '@/store/kategorije'
 import axios from 'axios'
-import UploadImages from 'vue-upload-drop-images'
 
 export default {
   name: 'noviIzvodac',
-  components: { UploadImages },
   data() {
     return {
       kategorije,
