@@ -59,6 +59,17 @@
                       />
                       <label class="label" for="cijena">Cijena</label>
                     </div>
+                    <b-form-file
+                      id="image"
+                      v-model="file1"
+                      :state="Boolean(file1)"
+                      placeholder="Choose a file or drop it here..."
+                      drop-placeholder="Drop file here..."
+                    ></b-form-file>
+                    {{ file1 }}
+                    <div class="mt-3">
+                      Selected file: {{ file1 ? file1.name : '' }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -110,28 +121,70 @@
 <script>
 import kategorije from '@/store/kategorije'
 import axios from 'axios'
+import UploadImages from 'vue-upload-drop-images'
+
 export default {
   name: 'noviIzvodac',
-
+  components: { UploadImages },
   data() {
-    return { kategorije, nazivKnjige: '', opis: '', cijena: '' }
+    return {
+      kategorije,
+      nazivKnjige: '',
+      opis: '',
+      cijena: '',
+      file1: null,
+      knjige: null,
+    }
   },
   methods: {
-    ucitaj() {
+    ucitaj(event) {
+      event.preventDefault()
       axios
         .post('http://10.42.206.52:3333/books', {
           naslov: this.nazivKnjige,
           opis: this.opis,
           cijena: this.cijena,
-          stanje: this.kategorije.selected,
         })
         .then(function (response) {
           console.log(response)
+
+          let formData = new FormData()
+          let file = document.getElementById('image').files[0]
+          formData.append('image', file)
+          axios
+            .post(
+              'http://10.42.206.52:3333/uploadImage/' + response.data,
+              formData,
+              {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              }
+            )
+            .then(function (response) {
+              console.log(response)
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
         })
         .catch(function (error) {
           console.log(error)
         })
     },
+  },
+  computed: {
+    maxId() {
+      return this.knjige.map((a) => a.id)
+    },
+  },
+  mounted() {
+    axios
+      .get('http://10.42.206.52:3333/books')
+      .then((response) => {
+        this.knjige = response.data
+      })
+      .catch((error) => console.log(error))
   },
 }
 </script>

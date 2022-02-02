@@ -21,7 +21,7 @@
           :key="idx"
           :naslov="card.naslov"
           :url="card.naslov.replace(/\s/g, '').toLowerCase()"
-          :slika="card.slika"
+          :slika="card.image"
           :marko="card.naslov"
         ></Knjiga>
       </div>
