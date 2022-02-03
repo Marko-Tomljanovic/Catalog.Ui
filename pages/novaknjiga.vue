@@ -66,10 +66,6 @@
                       placeholder="Choose a file or drop it here..."
                       drop-placeholder="Drop file here..."
                     ></b-form-file>
-                    {{ file1 }}
-                    <div class="mt-3">
-                      Selected file: {{ file1 ? file1.name : '' }}
-                    </div>
                   </div>
                 </div>
               </div>
@@ -104,6 +100,31 @@
                       Odabrano: {{ kategorije.selected }}
                     </p>
 
+                    <div class="contact-form row">
+                      <b-dropdown
+                        variant="dark"
+                        style="border-radius: 10px"
+                        id="dropdown-form"
+                        text="Kategorija knjige"
+                        ref="dropdown"
+                        class="mb-4 col-11 mx-auto"
+                        ><b-form-group>
+                          <b-form-checkbox-group
+                            switches
+                            :options="kategorije.odabirKategorije"
+                            v-model="kategorije.odabirSelected"
+                            class="ml-2"
+                          >
+                          </b-form-checkbox-group
+                        ></b-form-group>
+                      </b-dropdown>
+                    </div>
+                    <p class="text-muted">Možete odabrati više kategorija</p>
+                    <p class="text-muted">
+                      Odabrano:
+                      {{ this.kategorije.odabirSelected }}
+                    </p>
+
                     <b-button type="submit" class="blue col-6 mt-4"
                       >POHRANI</b-button
                     >
@@ -123,7 +144,7 @@ import kategorije from '@/store/kategorije'
 import axios from 'axios'
 
 export default {
-  name: 'noviIzvodac',
+  name: 'novaKnjiga',
   data() {
     return {
       kategorije,
@@ -142,13 +163,17 @@ export default {
           naslov: this.nazivKnjige,
           opis: this.opis,
           cijena: this.cijena,
+          stanje: this.kategorije.selected,
+          kategorija: JSON.stringify(this.kategorije.odabirSelected),
         })
         .then(function (response) {
           console.log(response)
 
           let formData = new FormData()
           let file = document.getElementById('image').files[0]
+
           formData.append('image', file)
+          console.log(formData.append('image', file))
           axios
             .post(
               'http://10.42.206.52:3333/uploadImage/' + response.data,
@@ -159,6 +184,7 @@ export default {
                 },
               }
             )
+
             .then(function (response) {
               console.log(response)
             })
@@ -169,6 +195,7 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
+      // this.$router.push({ path: '/' })
     },
   },
   computed: {
