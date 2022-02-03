@@ -48,8 +48,8 @@ export default {
       slika: require('../assets/book.jpg'),
     },
     {
-      naslov: 'Znanost i tehnlogija',
-      link: '/kategorija/znanostitehnlogija',
+      naslov: 'Znanost i tehnologija',
+      link: '/kategorija/znanostitehnologija',
       slika: require('../assets/book.jpg'),
       adress: 'znanostitehnlogija',
     },
@@ -91,6 +91,7 @@ export default {
     },
   ],
   selected: null,
+
   stanje: [
     {
       value: 'Bez vidljih oštećenja',
@@ -103,6 +104,51 @@ export default {
     {
       value: 'Vidljivo oštećena knjiga',
       text: 'Vidljivo oštećena knjiga',
+    },
+  ],
+
+  odabirSelected: [],
+
+  odabirKategorije: [
+    {
+      value: 'Romani',
+      text: 'Romani',
+    },
+    {
+      value: 'Znanstvena fantastika',
+      text: 'Dobro sa malim znakovima korištenja',
+    },
+    {
+      value: 'Drama',
+      text: 'Drama',
+    },
+    {
+      value: 'Poezija',
+      text: 'Poezija',
+    },
+    {
+      value: 'Knjige za djecu',
+      text: 'Knjige za djecu',
+    },
+    {
+      value: 'Biografija',
+      text: 'Biografija',
+    },
+    {
+      value: 'Povijest',
+      text: 'Povijest',
+    },
+    {
+      value: 'Religija',
+      text: 'Religija',
+    },
+    {
+      value: 'Umjetnost',
+      text: 'Umjetnost',
+    },
+    {
+      value: 'Znanost i tehnologija',
+      text: 'Znanost i tehnologija',
     },
   ],
 }

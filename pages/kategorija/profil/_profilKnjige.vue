@@ -4,7 +4,9 @@
       <p>Ime knjige : {{ knjigaProfila.naslov }}</p>
       <p>Stanje : {{ knjigaProfila.stanje }}</p>
       <p>Cijena : {{ knjigaProfila.cijena }}</p>
+      <p>Opis : {{ knjigaProfila.opis }}</p>
       <p>Itd..</p>
+      {{ knjige[0].kategorija.includes('Poezija') }}
     </div>
   </div>
 </template>

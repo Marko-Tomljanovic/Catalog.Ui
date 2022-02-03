@@ -26,6 +26,19 @@
         ></Knjiga>
       </div>
     </div>
+    <div class="container mx-auto">
+      <p class="text-center text-muted">Nema jos knjiga u kategoriji</p>
+      <br />
+      <b-overlay :show="true" class="d-inline-block" rounded="circle">
+        <b-img
+          thumbnail
+          rounded="circle"
+          fluid
+          src="@/assets/bookCard.jpg"
+          alt="bookCard"
+        ></b-img>
+      </b-overlay>
+    </div>
   </div>
 </template>
 
@@ -33,6 +46,7 @@
 import axios from 'axios'
 import store from '@/store/store'
 import kategorije from '@/store/kategorije'
+
 export default {
   name: 'kategorija',
   data() {
@@ -41,8 +55,17 @@ export default {
   computed: {
     pretrazi() {
       let termin = this.store.trazi
-      return this.knjige.filter((card) =>
+      return this.odabranaKategorija.filter((card) =>
         card.naslov.toLowerCase().includes(termin.toLowerCase())
+      )
+    },
+    odabranaKategorija() {
+      return this.knjige.filter(
+        (item) =>
+          item.kategorija
+            .replace(/\s/g, '')
+            .toLowerCase()
+            .includes(this.$route.params.knjige) === true
       )
     },
   },
@@ -51,6 +74,11 @@ export default {
       .get('http://10.42.206.52:3333/books')
       .then((response) => {
         this.knjige = response.data
+        // response.data.find(
+        //   ({ kategorija }) =>
+        //     kategorija.replace(/\s/g, '').toLowerCase() ===
+        //     this.$route.params.knjige
+        // )
       })
       .catch((error) => console.log(error))
   },
