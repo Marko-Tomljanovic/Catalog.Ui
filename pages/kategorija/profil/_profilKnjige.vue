@@ -6,7 +6,6 @@
       <p>Cijena : {{ knjigaProfila.cijena }}</p>
       <p>Opis : {{ knjigaProfila.opis }}</p>
       <p>Itd..</p>
-      {{ knjige[0].kategorija.includes('Poezija') }}
     </div>
   </div>
 </template>
@@ -37,7 +36,7 @@ export default {
   },
   mounted() {
     axios
-      .get('http://10.42.206.52:3333/books')
+      .get('http://10.42.206.52:3344/books')
       .then((response) => {
         this.knjige = response.data
         console.log($route.params)

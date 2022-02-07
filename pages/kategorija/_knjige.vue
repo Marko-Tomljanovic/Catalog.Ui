@@ -26,7 +26,7 @@
         ></Knjiga>
       </div>
     </div>
-    <div class="container mx-auto">
+    <div v-if="!knjige.length > 0" class="container">
       <p class="text-center text-muted">Nema jos knjiga u kategoriji</p>
       <br />
       <b-overlay :show="true" class="d-inline-block" rounded="circle">
@@ -50,35 +50,31 @@ import kategorije from '@/store/kategorije'
 export default {
   name: 'kategorija',
   data() {
-    return { kategorije, store, knjige: null }
+    return {
+      kategorije,
+      store,
+      knjige: [],
+    }
   },
   computed: {
     pretrazi() {
       let termin = this.store.trazi
-      return this.odabranaKategorija.filter((card) =>
+      return this.knjige.filter((card) =>
         card.naslov.toLowerCase().includes(termin.toLowerCase())
-      )
-    },
-    odabranaKategorija() {
-      return this.knjige.filter(
-        (item) =>
-          item.kategorija
-            .replace(/\s/g, '')
-            .toLowerCase()
-            .includes(this.$route.params.knjige) === true
       )
     },
   },
   mounted() {
     axios
-      .get('http://10.42.206.52:3333/books')
+      .get('http://10.42.206.52:3344/books')
       .then((response) => {
-        this.knjige = response.data
-        // response.data.find(
-        //   ({ kategorija }) =>
-        //     kategorija.replace(/\s/g, '').toLowerCase() ===
-        //     this.$route.params.knjige
-        // )
+        this.knjige = response.data.filter(
+          (item) =>
+            item.kategorija
+              .replace(/\s/g, '')
+              .toLowerCase()
+              .includes(this.$route.params.knjige) === true
+        )
       })
       .catch((error) => console.log(error))
   },
