@@ -74,7 +74,7 @@
           <div class="col-md-5">
             <div class="card">
               <div class="card-body">
-                <div class="flex-column align-items-center text-center">
+                <div class="flex-column text-center">
                   <div class="contact-form">
                     <div class="contact-form row">
                       <b-dropdown
@@ -99,37 +99,36 @@
                     <p class="text-muted">
                       Odabrano: {{ kategorije.selected }}
                     </p>
-
-                    <div class="contact-form row">
-                      <b-dropdown
-                        variant="dark"
-                        style="border-radius: 10px"
-                        id="dropdown-form"
-                        text="Kategorija knjige"
-                        ref="dropdown"
-                        class="mb-4 col-11 mx-auto"
-                        ><b-form-group>
-                          <b-form-checkbox-group
-                            switches
-                            :options="kategorije.odabirKategorije"
-                            v-model="kategorije.odabirSelected"
-                            class="ml-2"
-                          >
-                          </b-form-checkbox-group
-                        ></b-form-group>
-                      </b-dropdown>
-                    </div>
-                    <p class="text-muted">Možete odabrati više kategorija</p>
-                    <p class="text-muted">
-                      Odabrano:
-                      {{ this.kategorije.odabirSelected }}
-                    </p>
-
-                    <b-button type="submit" class="blue col-6 mt-4"
-                      >POHRANI</b-button
-                    >
                   </div>
+                  <label class="label font-weight-bold"
+                    >Književni žanrovi</label
+                  >
                 </div>
+
+                <div class="contact-form row">
+                  <b-form-group>
+                    <b-form-checkbox-group
+                      switches
+                      stacked
+                      :options="kategorije.odabirKategorije"
+                      v-model="kategorije.odabirSelected"
+                      class="ml-2"
+                    >
+                    </b-form-checkbox-group
+                  ></b-form-group>
+                </div>
+                <p class="text-muted">Možete odabrati više kategorija</p>
+
+                <b-button type="submit" class="blue col-7 mt-5"
+                  >POHRANI</b-button
+                >
+                <b-button
+                  to="/"
+                  variant="danger"
+                  type="button"
+                  class="blue col-7 mt-5"
+                  >ODUSTANI</b-button
+                >
               </div>
             </div>
           </div>
@@ -159,7 +158,7 @@ export default {
     ucitaj(event) {
       event.preventDefault()
       axios
-        .post('http://10.42.206.52:3333/books', {
+        .post('http://10.42.206.52:3344/books', {
           naslov: this.nazivKnjige,
           opis: this.opis,
           cijena: this.cijena,
@@ -176,7 +175,7 @@ export default {
           console.log(formData.append('image', file))
           axios
             .post(
-              'http://10.42.206.52:3333/uploadImage/' + response.data,
+              'http://10.42.206.52:3344/uploadImage/' + response.data,
               formData,
               {
                 headers: {
@@ -205,7 +204,7 @@ export default {
   },
   mounted() {
     axios
-      .get('http://10.42.206.52:3333/books')
+      .get('http://10.42.206.52:3344/books')
       .then((response) => {
         this.knjige = response.data
       })
