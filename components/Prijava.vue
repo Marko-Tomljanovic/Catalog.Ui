@@ -7,9 +7,9 @@
       >
         <b-form-input
           type="email"
-          id="username"
-          v-model="username"
-          placeholder="korisničko ime"
+          id="email"
+          v-model="email"
+          placeholder="email adrasa"
           required
         ></b-form-input>
         <b-form-input
@@ -35,27 +35,46 @@
         Zapamti me
       </b-form-checkbox>
     </form>
-
-    <template #modal-footer="{ prijava, odustani }">
-      <b-button size="sm" variant="success" @click="prijava()">
+    <template #modal-footer>
+      <b-button size="sm" variant="success" @click="prijava">
         PRIJAVA
       </b-button>
-      <b-button size="sm" variant="info" @click="odustani()">
-        ODUSTANI
-      </b-button>
-    </template>
+      <b-button size="sm" variant="info"> ODUSTANI </b-button></template
+    >
   </b-modal>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Prijava',
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
       xchecked: false,
     }
+  },
+  methods: {
+    prijava() {
+      axios
+        .post(
+          'http://10.42.206.52:3344/login',
+          { email: this.email, password: this.password },
+          {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Access-Control-Allow-Origin': '*',
+          }
+        )
+        .then((res) => {
+          console.log('RESPONSE RECEIVED: ', res.data.token)
+          // this.$router.push('/')
+        })
+        .catch((err) => {
+          console.log('AXIOS ERROR: ', err)
+        })
+    },
   },
 }
 </script>
