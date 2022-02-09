@@ -14,6 +14,14 @@
         v-b-modal.modal-center
         >PRIJAVI SE</b-button
       >
+      <!-- <b-button
+        v-if="isLoggedIn"
+        @click="odjava"
+        variant="outline-info"
+        style="color: white"
+        class="float-right"
+        >ODJAVA</b-button
+      > -->
 
       <Prijava />
       <b-card-text> Zamjeni knjigu s nekim ili prodaj. </b-card-text>
@@ -44,22 +52,26 @@ export default {
     return {
       kategorije,
       info: null,
+      isLoggedIn: process.server ? '' : !!localStorage.getItem('token'),
     }
   },
+  methods: {
+    odjava() {
+      axios
+        .post('http://10.42.206.52:3344/logout', {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+          },
+        })
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error))
+    },
+  },
   mounted() {
-    const config = {
-      headers: {
-        Authorization:
-          'Bearer ' +
-          'NzE.a_8kBLGq1GbxYjilE7Pl-B0OUP90VcPdHdnScstBOBE8VrYMTwPGTGtKBpNm',
-      },
-    }
     axios
       .get('http://10.42.206.52:3344/books', {
         headers: {
-          Authorization:
-            'Bearer ' +
-            'NzE.a_8kBLGq1GbxYjilE7Pl-B0OUP90VcPdHdnScstBOBE8VrYMTwPGTGtKBpNm',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
       })
       .then((response) => (this.info = response.data))

@@ -1,5 +1,11 @@
 <template>
-  <b-modal id="modal-center" no-close-on-backdrop centered title="Prijava">
+  <b-modal
+    v-model="modalShow"
+    id="modal-center"
+    no-close-on-backdrop
+    centered
+    title="Prijava"
+  >
     <form ref="form" @submit.stop.prevent="handleSubmit">
       <b-form-group
         label-for="username"
@@ -22,7 +28,8 @@
         ></b-form-input>
         <b-form-text id="password-help-block">
           Lozinka mora sadrzavati minimalno 6 znakova.<br />
-          Nemaš račun, registriraj se <NuxtLink to="/"> OVDJE </NuxtLink>
+          Nemaš račun, registriraj se
+          <NuxtLink to="/registracija"> OVDJE </NuxtLink>
         </b-form-text>
       </b-form-group>
 
@@ -54,9 +61,16 @@ export default {
       email: '',
       password: '',
       xchecked: false,
+      modalShow: false,
     }
   },
   methods: {
+    empty() {
+      this.email = ''
+      this.password = ''
+      this.xchecked = ''
+      this.modalShow = !this.modalShow
+    },
     prijava() {
       axios
         .post(
@@ -69,7 +83,8 @@ export default {
         )
         .then((res) => {
           console.log('RESPONSE RECEIVED: ', res.data.token)
-          // this.$router.push('/')
+          localStorage.setItem('token', res.data.token)
+          this.empty()
         })
         .catch((err) => {
           console.log('AXIOS ERROR: ', err)
