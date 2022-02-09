@@ -31,6 +31,7 @@
         :slika="card.slika"
       ></FixKategorija>
     </div>
+    {{ info }}
   </b-container>
 </template>
 
@@ -46,8 +47,21 @@ export default {
     }
   },
   mounted() {
+    const config = {
+      headers: {
+        Authorization:
+          'Bearer ' +
+          'NzE.a_8kBLGq1GbxYjilE7Pl-B0OUP90VcPdHdnScstBOBE8VrYMTwPGTGtKBpNm',
+      },
+    }
     axios
-      .get('http://10.42.206.52:3344/books')
+      .get('http://10.42.206.52:3344/books', {
+        headers: {
+          Authorization:
+            'Bearer ' +
+            'NzE.a_8kBLGq1GbxYjilE7Pl-B0OUP90VcPdHdnScstBOBE8VrYMTwPGTGtKBpNm',
+        },
+      })
       .then((response) => (this.info = response.data))
       .catch((error) => console.log(error))
   },

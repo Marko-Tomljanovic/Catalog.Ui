@@ -65,8 +65,24 @@ export default {
     },
   },
   mounted() {
+    // const instance = axios.create({
+    //   baseURL: 'http://10.42.206.52:3344/books',
+    //   timeout: 1000,
+    //   headers: {
+    //     Authorization:
+    //       'Bearer ' +
+    //       'NzE.a_8kBLGq1GbxYjilE7Pl-B0OUP90VcPdHdnScstBOBE8VrYMTwPGTGtKBpNm',
+    //   },
+    // })
+
     axios
-      .get('http://10.42.206.52:3344/books')
+      .get('http://10.42.206.52:3344/books', {
+        headers: {
+          Authorization:
+            'Bearer ' +
+            'NzE.a_8kBLGq1GbxYjilE7Pl-B0OUP90VcPdHdnScstBOBE8VrYMTwPGTGtKBpNm',
+        },
+      })
       .then((response) => {
         this.knjige = response.data.filter(
           (item) =>
