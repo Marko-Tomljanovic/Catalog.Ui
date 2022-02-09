@@ -38,9 +38,7 @@ export default {
     axios
       .get('http://10.42.206.52:3344/books', {
         headers: {
-          Authorization:
-            'Bearer ' +
-            'NzE.a_8kBLGq1GbxYjilE7Pl-B0OUP90VcPdHdnScstBOBE8VrYMTwPGTGtKBpNm',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
       })
       .then((response) => {

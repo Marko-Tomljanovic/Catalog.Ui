@@ -158,13 +158,21 @@ export default {
     ucitaj(event) {
       event.preventDefault()
       axios
-        .post('http://10.42.206.52:3344/books', {
-          naslov: this.nazivKnjige,
-          opis: this.opis,
-          cijena: this.cijena,
-          stanje: this.kategorije.selected,
-          kategorija: JSON.stringify(this.kategorije.odabirSelected),
-        })
+        .post(
+          'http://10.42.206.52:3344/books',
+          {
+            naslov: this.nazivKnjige,
+            opis: this.opis,
+            cijena: this.cijena,
+            stanje: this.kategorije.selected,
+            kategorija: JSON.stringify(this.kategorije.odabirSelected),
+          },
+          {
+            headers: {
+              Authorization: 'Bearer ' + localStorage.getItem('token'),
+            },
+          }
+        )
         .then(function (response) {
           console.log(response)
 
@@ -176,16 +184,19 @@ export default {
           axios
             .post(
               'http://10.42.206.52:3344/uploadImage/' + response.data,
+
               formData,
               {
                 headers: {
-                  'Content-Type': 'multipart/form-data',
+                  Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
               }
             )
-
             .then(function (response) {
               console.log(response)
+              $nuxt.$options.router.replace({
+                path: '/',
+              })
             })
             .catch(function (error) {
               console.log(error)
@@ -204,7 +215,11 @@ export default {
   },
   mounted() {
     axios
-      .get('http://10.42.206.52:3344/books')
+      .get('http://10.42.206.52:3344/books', {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      })
       .then((response) => {
         this.knjige = response.data
       })
