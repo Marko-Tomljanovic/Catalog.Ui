@@ -53,6 +53,7 @@
 
 <script>
 import axios from 'axios'
+import store from '@/store/store'
 
 export default {
   name: 'Prijava',
@@ -62,10 +63,12 @@ export default {
       password: '',
       xchecked: false,
       modalShow: false,
+      store,
     }
   },
   methods: {
     empty() {
+      this.store.showLogIn = false
       this.email = ''
       this.password = ''
       this.xchecked = ''
