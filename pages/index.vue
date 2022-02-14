@@ -8,20 +8,21 @@
       text-variant="white"
       title="Knjigoteka"
       ><b-button
+        v-if="store.showLogIn"
         variant="outline-info"
         style="color: white"
         class="float-right"
         v-b-modal.modal-center
         >PRIJAVI SE</b-button
       >
-      <!-- <b-button
-        v-if="isLoggedIn"
+      <b-button
+        v-if="!store.showLogIn"
         @click="odjava"
         variant="outline-info"
         style="color: white"
         class="float-right"
         >ODJAVA</b-button
-      > -->
+      >
 
       <Prijava />
       <b-card-text> Zamjeni knjigu s nekim ili prodaj. </b-card-text>
@@ -45,12 +46,14 @@
 
 <script>
 import axios from 'axios'
-import kategorije from '../store/kategorije'
+import kategorije from '@/store/kategorije'
+import store from '@/store/store'
 export default {
   name: 'IndexPage',
   data() {
     return {
       kategorije,
+      store,
       info: null,
       isLoggedIn: process.server ? '' : !!localStorage.getItem('token'),
     }
@@ -63,7 +66,12 @@ export default {
             Authorization: 'Bearer ' + localStorage.getItem('token'),
           },
         })
-        .then((response) => console.log(response))
+        .then((response) => {
+          console.log(response.data.revoked)
+          localStorage.clear()
+          this.store.showLogIn = false
+          this.$nuxt.$options.router.go(0)
+        })
         .catch((error) => console.log(error))
     },
   },
