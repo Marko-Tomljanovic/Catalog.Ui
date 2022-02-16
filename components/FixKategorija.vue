@@ -1,6 +1,11 @@
 <template>
   <NuxtLink style="text-decoration: none" :to="link">
-    <b-card :img-src="slika" img-top class="mb-2 mt-3" style="max-width: 20rem">
+    <b-card
+      :img-src="slika"
+      img-top
+      class="mb-2 mt-3"
+      style="max-width: 20rem; border: none"
+    >
       <b-card-text class="font-weight-bold" style="margin-top: -5px">
         {{ naslov }}
       </b-card-text>

@@ -1,139 +1,144 @@
 <template>
-  <div class="container">
-    <div class="main-body mt-4">
-      <b-form @submit="ucitaj">
-        <div class="row gutters-sm">
-          <div class="col-md-7 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="xd-flex flex-column align-items-center text-center">
-                  <div class="contact-form">
-                    <h5 class="mb-2" style="color: #2677a7">
-                      UNOS NOVE KNJIGE
-                    </h5>
-                    <br />
+  <div>
+    <div v-if="!store.isLoggedIn"><MustLogIn /></div>
+    <div v-if="store.isLoggedIn" class="container">
+      <div class="main-body mt-4">
+        <b-form @submit="ucitaj">
+          <div class="row gutters-sm">
+            <div class="col-md-7 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="xd-flex flex-column align-items-center text-center"
+                  >
+                    <div class="contact-form">
+                      <h5 class="mb-2" style="color: #2677a7">
+                        UNOS NOVE KNJIGE
+                      </h5>
+                      <br />
 
-                    <div class="form-field col-12 mx-auto mb-0">
-                      <input
-                        id="imeKnjige"
-                        v-model="nazivKnjige"
-                        class="input-text js-input"
-                        type="text"
-                        autocomplete="off"
-                        required
-                      />
-                      <label class="label" for="imeFirme">Naziv knjige</label>
-                    </div>
+                      <div class="form-field col-12 mx-auto mb-0">
+                        <input
+                          id="imeKnjige"
+                          v-model="nazivKnjige"
+                          class="input-text js-input"
+                          type="text"
+                          autocomplete="off"
+                          required
+                        />
+                        <label class="label" for="imeFirme">Naziv knjige</label>
+                      </div>
 
-                    <div class="form-field col-lg-12 mx-auto">
-                      <textarea
-                        id="opis"
-                        v-model="opis"
-                        class="input-text js-input"
-                        type="text"
-                        autocomplete="off"
-                        required
-                        style="height: 60px"
-                        maxlength="110"
-                      ></textarea>
-                      <label
-                        class="label"
-                        style="margin-bottom: 30px"
-                        for="opis"
-                        >Opis</label
-                      >
-                    </div>
-                    <p class="text-muted text-left">
-                      Max {{ opis.length }}/110 znakova
-                    </p>
+                      <div class="form-field col-lg-12 mx-auto">
+                        <textarea
+                          id="opis"
+                          v-model="opis"
+                          class="input-text js-input"
+                          type="text"
+                          autocomplete="off"
+                          required
+                          style="height: 60px"
+                          maxlength="110"
+                        ></textarea>
+                        <label
+                          class="label"
+                          style="margin-bottom: 30px"
+                          for="opis"
+                          >Opis</label
+                        >
+                      </div>
+                      <p class="text-muted text-left">
+                        Max {{ opis.length }}/110 znakova
+                      </p>
 
-                    <div class="form-field col-lg-8 mx-auto">
-                      <input
-                        id="cijena"
-                        v-model="cijena"
-                        class="input-text js-input"
-                        type="number"
-                        placeholder="kn"
-                        autocomplete="off"
-                        required
-                      />
-                      <label class="label" for="cijena">Cijena</label>
+                      <div class="form-field col-lg-8 mx-auto">
+                        <input
+                          id="cijena"
+                          v-model="cijena"
+                          class="input-text js-input"
+                          type="number"
+                          placeholder="kn"
+                          autocomplete="off"
+                          required
+                        />
+                        <label class="label" for="cijena">Cijena</label>
+                      </div>
+                      <b-form-file
+                        id="image"
+                        v-model="file1"
+                        :state="Boolean(file1)"
+                        placeholder="Choose a file or drop it here..."
+                        drop-placeholder="Drop file here..."
+                      ></b-form-file>
                     </div>
-                    <b-form-file
-                      id="image"
-                      v-model="file1"
-                      :state="Boolean(file1)"
-                      placeholder="Choose a file or drop it here..."
-                      drop-placeholder="Drop file here..."
-                    ></b-form-file>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-5">
-            <div class="card">
-              <div class="card-body">
-                <div class="flex-column text-center">
-                  <div class="contact-form">
-                    <div class="contact-form row">
-                      <b-dropdown
-                        variant="dark"
-                        style="border-radius: 10px"
-                        id="dropdown-form"
-                        text="Stanje"
-                        ref="dropdown"
-                        class="mb-4 col-11 mx-auto"
-                        ><b-form-group>
-                          <b-form-checkbox-group
-                            switches
-                            :options="kategorije.stanje"
-                            v-model="kategorije.selected"
-                            class="ml-2"
-                          >
-                          </b-form-checkbox-group
-                        ></b-form-group>
-                      </b-dropdown>
+            <div class="col-md-5">
+              <div class="card">
+                <div class="card-body">
+                  <div class="flex-column text-center">
+                    <div class="contact-form">
+                      <div class="contact-form row">
+                        <b-dropdown
+                          variant="dark"
+                          style="border-radius: 10px"
+                          id="dropdown-form"
+                          text="Stanje"
+                          ref="dropdown"
+                          class="mb-4 col-11 mx-auto"
+                          ><b-form-group>
+                            <b-form-checkbox-group
+                              switches
+                              :options="kategorije.stanje"
+                              v-model="kategorije.selected"
+                              class="ml-2"
+                            >
+                            </b-form-checkbox-group
+                          ></b-form-group>
+                        </b-dropdown>
+                      </div>
+                      <p class="text-muted">Odaberite stanje knjige</p>
+                      <p class="text-muted">
+                        Odabrano: {{ kategorije.selected }}
+                      </p>
                     </div>
-                    <p class="text-muted">Odaberite stanje knjige</p>
-                    <p class="text-muted">
-                      Odabrano: {{ kategorije.selected }}
-                    </p>
+                    <label class="label font-weight-bold"
+                      >Književni žanrovi</label
+                    >
                   </div>
-                  <label class="label font-weight-bold"
-                    >Književni žanrovi</label
+
+                  <div class="contact-form row">
+                    <b-form-group>
+                      <b-form-checkbox-group
+                        switches
+                        stacked
+                        :options="kategorije.odabirKategorije"
+                        v-model="kategorije.odabirSelected"
+                        class="ml-2"
+                      >
+                      </b-form-checkbox-group
+                    ></b-form-group>
+                  </div>
+                  <p class="text-muted">Možete odabrati više kategorija</p>
+
+                  <b-button type="submit" class="blue col-7 mt-5"
+                    >POHRANI</b-button
+                  >
+                  <b-button
+                    to="/"
+                    variant="danger"
+                    type="button"
+                    class="blue col-7 mt-5"
+                    >ODUSTANI</b-button
                   >
                 </div>
-
-                <div class="contact-form row">
-                  <b-form-group>
-                    <b-form-checkbox-group
-                      switches
-                      stacked
-                      :options="kategorije.odabirKategorije"
-                      v-model="kategorije.odabirSelected"
-                      class="ml-2"
-                    >
-                    </b-form-checkbox-group
-                  ></b-form-group>
-                </div>
-                <p class="text-muted">Možete odabrati više kategorija</p>
-
-                <b-button type="submit" class="blue col-7 mt-5"
-                  >POHRANI</b-button
-                >
-                <b-button
-                  to="/"
-                  variant="danger"
-                  type="button"
-                  class="blue col-7 mt-5"
-                  >ODUSTANI</b-button
-                >
               </div>
             </div>
           </div>
-        </div>
-      </b-form>
+        </b-form>
+      </div>
     </div>
   </div>
 </template>
@@ -141,9 +146,12 @@
 <script>
 import kategorije from '@/store/kategorije'
 import axios from 'axios'
+import store from '@/store/store'
+import MustLogIn from '@/components/MustLogIn.vue'
 
 export default {
   name: 'novaKnjiga',
+  components: { MustLogIn },
   data() {
     return {
       kategorije,
@@ -152,6 +160,7 @@ export default {
       cijena: '',
       file1: null,
       knjige: null,
+      store,
     }
   },
   methods: {
@@ -205,7 +214,6 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
-      // this.$router.push({ path: '/' })
     },
   },
   computed: {

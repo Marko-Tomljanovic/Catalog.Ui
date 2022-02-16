@@ -91,7 +91,14 @@
                 </div>
               </div>
             </div>
+            <br />
+            <div>
+              <b-button to="/" block variant="primary"
+                >Početna stranica</b-button
+              >
+            </div>
           </div>
+
           <div class="col-2">
             <input
               type="button"
@@ -122,13 +129,11 @@
 
 <script>
 import axios from 'axios'
-import store from '@/store/store'
 
 export default {
   name: 'profil',
   data() {
     return {
-      store,
       knjige: null,
     }
   },
@@ -161,9 +166,6 @@ export default {
 </script>
 
 <style>
-body {
-  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-}
 .emp-profile {
   padding: 3%;
   margin-top: 3%;
