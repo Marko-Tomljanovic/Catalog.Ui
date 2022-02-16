@@ -1,14 +1,15 @@
 <template>
   <b-container
-    ><div class="pt-3"></div>
+    ><div class="pt-2"></div>
     <b-card
+      style="border: none"
       overlay
       img-src="https://picsum.photos/900/250/?image=24"
       img-alt="Card Image"
       text-variant="white"
       title="Knjigoteka"
       ><b-button
-        v-if="store.showLogIn"
+        v-if="!store.isLoggedIn"
         variant="outline-info"
         style="color: white"
         class="float-right"
@@ -16,7 +17,7 @@
         >PRIJAVI SE</b-button
       >
       <b-button
-        v-if="!store.showLogIn"
+        v-if="store.isLoggedIn"
         @click="odjava"
         variant="outline-info"
         style="color: white"
@@ -55,7 +56,6 @@ export default {
       kategorije,
       store,
       info: null,
-      isLoggedIn: process.server ? '' : !!localStorage.getItem('token'),
     }
   },
   methods: {
@@ -87,3 +87,9 @@ export default {
   },
 }
 </script>
+
+<style>
+body {
+  background: -webkit-linear-gradient(left, #4e7ada, #979edd, #4e7ada, #979edd);
+}
+</style>

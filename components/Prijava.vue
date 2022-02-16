@@ -6,7 +6,7 @@
     centered
     title="Prijava"
   >
-    <form ref="form" @submit.stop.prevent="handleSubmit">
+    <form ref="form" @submit.prevent="handleSubmit">
       <b-form-group
         label-for="username"
         invalid-feedback="Korisnicko ime je potrebno"
@@ -46,14 +46,15 @@
       <b-button size="sm" variant="success" @click="prijava">
         PRIJAVA
       </b-button>
-      <b-button size="sm" variant="info"> ODUSTANI </b-button></template
+      <b-button size="sm" variant="info" @click="empty">
+        ODUSTANI
+      </b-button></template
     >
   </b-modal>
 </template>
 
 <script>
 import axios from 'axios'
-import store from '@/store/store'
 
 export default {
   name: 'Prijava',
@@ -63,12 +64,10 @@ export default {
       password: '',
       xchecked: false,
       modalShow: false,
-      store,
     }
   },
   methods: {
     empty() {
-      this.store.showLogIn = false
       this.email = ''
       this.password = ''
       this.xchecked = ''
@@ -85,9 +84,10 @@ export default {
           }
         )
         .then((res) => {
-          console.log('RESPONSE RECEIVED: ', res.data.token)
           localStorage.setItem('token', res.data.token)
+          localStorage.setItem('user', this.email)
           this.empty()
+          window.location.reload(true)
         })
         .catch((err) => {
           console.log('AXIOS ERROR: ', err)
