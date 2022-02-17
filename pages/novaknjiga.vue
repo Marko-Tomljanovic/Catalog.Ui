@@ -131,7 +131,7 @@
                     variant="danger"
                     type="button"
                     class="blue col-7 mt-5"
-                    >ODUSTANI</b-button
+                    >POVRATAK</b-button
                   >
                 </div>
               </div>

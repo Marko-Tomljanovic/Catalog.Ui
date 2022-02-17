@@ -27,7 +27,7 @@
 
       <Prijava />
       <b-card-text> Zamjeni knjigu s nekim ili prodaj. </b-card-text>
-      <b-button to="/novaknjiga">DODAJ KNJIGU</b-button>
+      <b-button variant="info" to="/novaknjiga">DODAJ KNJIGU</b-button>
     </b-card>
 
     <div class="row mx-auto">
@@ -41,7 +41,6 @@
         :slika="card.slika"
       ></FixKategorija>
     </div>
-    {{ info }}
   </b-container>
 </template>
 
@@ -74,16 +73,6 @@ export default {
         })
         .catch((error) => console.log(error))
     },
-  },
-  mounted() {
-    axios
-      .get('http://10.42.206.52:3344/books', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      })
-      .then((response) => (this.info = response.data))
-      .catch((error) => console.log(error))
   },
 }
 </script>
