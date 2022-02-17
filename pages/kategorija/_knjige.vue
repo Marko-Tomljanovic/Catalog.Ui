@@ -26,17 +26,24 @@
       </div>
     </div>
     <div v-if="!knjige.length > 0" class="container">
-      <p class="text-center text-muted">Nema jos knjiga u kategoriji</p>
+      <p class="text-center" style="color: white">
+        Nema jos knjiga u kategoriji
+      </p>
       <br />
-      <b-overlay :show="true" class="d-inline-block" rounded="circle">
-        <b-img
-          thumbnail
-          rounded="circle"
-          fluid
-          src="@/assets/bookCard.jpg"
-          alt="bookCard"
-        ></b-img>
-      </b-overlay>
+      <b-row>
+        <b-col></b-col>
+        <b-col cols="6"
+          ><b-overlay :show="true" class="d-inline-block" rounded="circle">
+            <b-img
+              thumbnail
+              rounded="circle"
+              fluid
+              src="@/assets/bookCard.jpg"
+              alt="bookCard"
+            ></b-img> </b-overlay
+        ></b-col>
+        <b-col></b-col>
+      </b-row>
     </div>
   </div>
 </template>
@@ -79,7 +86,10 @@ export default {
               .includes(this.$route.params.knjige) === true
         )
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        console.log(error)
+        localStorage.clear()
+      })
   },
 }
 </script>

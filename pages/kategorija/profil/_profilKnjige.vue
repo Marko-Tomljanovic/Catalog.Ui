@@ -158,9 +158,11 @@ export default {
       })
       .then((response) => {
         this.knjige = response.data
-        console.log($route.params)
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        console.log(error)
+        localStorage.clear()
+      })
   },
 }
 </script>

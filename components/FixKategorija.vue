@@ -6,6 +6,9 @@
       class="mb-2 mt-3"
       style="max-width: 20rem; border: none"
     >
+      <!-- <div class="card-img-overlay">
+        <h5 class="card-title">{{ naslov }}</h5>
+      </div> -->
       <b-card-text class="font-weight-bold" style="margin-top: -5px">
         {{ naslov }}
       </b-card-text>
