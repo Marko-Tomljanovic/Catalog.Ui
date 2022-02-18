@@ -20,7 +20,7 @@
           v-for="(card, idx) in pretrazi"
           :key="idx"
           :naslov="card.naslov"
-          :url="card.naslov.replace(/\s/g, '').toLowerCase()"
+          :url="`profil/` + card.naslov.replace(/\s/g, '').toLowerCase()"
           :slika="card.image"
         ></Knjiga>
       </div>
@@ -40,8 +40,10 @@
               fluid
               src="@/assets/bookCard.jpg"
               alt="bookCard"
-            ></b-img> </b-overlay
-        ></b-col>
+            ></b-img
+          ></b-overlay>
+          <b-button @click="$router.back()" class="mt-4 col">POVRATAK</b-button>
+        </b-col>
         <b-col></b-col>
       </b-row>
     </div>

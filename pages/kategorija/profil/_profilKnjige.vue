@@ -100,12 +100,12 @@
           </div>
 
           <div class="col-2">
-            <input
+            <b-button
               type="button"
               class="profile-edit-btn"
-              name="btnAddMore"
-              value="Kupi knjigu"
-            />
+              to="/kategorija/profil/kupi"
+              >Kupi knjigu</b-button
+            >
           </div>
         </div>
         <div class="row">
@@ -210,8 +210,9 @@ export default {
   width: 70%;
   padding: 7%;
   font-weight: 600;
-  color: #6c757d;
+  color: #ffffff;
   cursor: pointer;
+  background-color: #a3a3a3;
 }
 .proile-rating {
   font-size: 12px;
