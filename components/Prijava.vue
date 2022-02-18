@@ -6,7 +6,7 @@
     centered
     title="Prijava"
   >
-    <form ref="form" @submit.prevent="handleSubmit">
+    <form ref="form" @submit.stop.prevent="handleSubmit">
       <b-form-group
         label-for="username"
         invalid-feedback="Korisnicko ime je potrebno"
@@ -43,10 +43,10 @@
       </b-form-checkbox>
     </form>
     <template #modal-footer>
-      <b-button size="sm" variant="success" @click="prijava">
+      <b-button type="submit" size="sm" variant="success" @click="prijava">
         PRIJAVA
       </b-button>
-      <b-button size="sm" variant="info" @click="empty">
+      <b-button type="button" size="sm" variant="info" @click="empty">
         ODUSTANI
       </b-button></template
     >

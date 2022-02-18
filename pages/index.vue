@@ -2,6 +2,7 @@
   <b-container
     ><div class="pt-2"></div>
     <b-card
+      class="shadowH"
       style="border: none"
       overlay
       img-src="https://picsum.photos/900/250/?image=24"
@@ -76,9 +77,3 @@ export default {
   },
 }
 </script>
-
-<style>
-body {
-  background: -webkit-linear-gradient(left, #4e7ada, #979edd, #4e7ada, #979edd);
-}
-</style>

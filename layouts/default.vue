@@ -5,7 +5,11 @@
       class="col sticky-top"
       style="background-color: black"
     >
-      <p style="color: silver" class="text-right">KORISNIK : {{ user }}</p>
+      <p class="text-right">
+        <NuxtLink style="color: silver" to="/korisnik">
+          KORISNIK : {{ user }}</NuxtLink
+        >
+      </p>
     </div>
     <Nuxt />
   </div>
@@ -26,3 +30,9 @@ export default {
   },
 }
 </script>
+
+<style>
+body {
+  background: -webkit-linear-gradient(left, #4e7ada, #979edd, #4e7ada, #979edd);
+}
+</style>

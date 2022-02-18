@@ -1,9 +1,9 @@
 <template>
-  <NuxtLink :to="`profil/${url}`">
+  <NuxtLink :to="url">
     <b-card
       :img-src="`http://10.42.206.52:3344${slika}`"
       img-top
-      class="mb-2 mt-3"
+      class="mb-2 mt-3 shadowH"
       style="max-width: 200px"
     >
       <b-card-text class="font-weight-bold" style="margin-top: -5px">

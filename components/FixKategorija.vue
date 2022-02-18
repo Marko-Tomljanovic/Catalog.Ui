@@ -3,7 +3,7 @@
     <b-card
       :img-src="slika"
       img-top
-      class="mb-2 mt-3"
+      class="mb-2 mt-3 shadowH"
       style="max-width: 20rem; border: none"
     >
       <!-- <div class="card-img-overlay">
