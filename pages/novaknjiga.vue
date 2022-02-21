@@ -175,6 +175,7 @@ export default {
             cijena: this.cijena,
             stanje: this.kategorije.selected,
             kategorija: JSON.stringify(this.kategorije.odabirSelected),
+            user: store.user,
           },
           {
             headers: {

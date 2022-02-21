@@ -61,15 +61,18 @@ export default {
   methods: {
     odjava() {
       axios
-        .post('http://10.42.206.52:3344/logout', {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('token'),
-          },
-        })
+        .post(
+          'http://10.42.206.52:3344/logout',
+          {},
+          {
+            headers: {
+              Authorization: 'Bearer ' + localStorage.getItem('token'),
+            },
+          }
+        )
         .then((response) => {
-          console.log(response.data.revoked)
-          localStorage.clear()
-          this.store.showLogIn = false
+          console.log(response.data)
+          localStorage.clear('token')
           this.$nuxt.$options.router.go(0)
         })
         .catch((error) => console.log(error))

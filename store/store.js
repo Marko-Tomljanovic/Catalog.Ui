@@ -1,6 +1,8 @@
 export default {
   trazi: '',
-  isLoggedIn: process.server ? '' : !!localStorage.getItem('token'),
+  isLoggedIn: false,
+  user: '',
+  // isLoggedIn: process.server ? '' : !!localStorage.getItem('token'),
 
   funkPass(checkbox) {
     if (checkbox == true) {

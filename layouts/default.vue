@@ -7,7 +7,7 @@
     >
       <p class="text-right">
         <NuxtLink style="color: silver" to="/korisnik">
-          KORISNIK : {{ user }}</NuxtLink
+          KORISNIK : {{ store.user }}</NuxtLink
         >
       </p>
     </div>
@@ -17,16 +17,30 @@
 
 <script>
 import store from '@/store/store'
+import axios from 'axios'
+
 export default {
   data() {
     return {
       store,
     }
   },
-  computed: {
-    user() {
-      return localStorage.getItem('user')
-    },
+
+  mounted() {
+    axios
+      .get('http://10.42.206.52:3344/check', {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      })
+      .then((response) => {
+        // console.log(response.data.user.email)
+        this.store.isLoggedIn = response.data.isValid
+        this.store.user = response.data.user.email
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   },
 }
 </script>
