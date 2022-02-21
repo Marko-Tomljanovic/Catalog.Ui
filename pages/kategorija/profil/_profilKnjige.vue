@@ -151,11 +151,7 @@ export default {
   },
   mounted() {
     axios
-      .get('http://10.42.206.52:3344/books', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      })
+      .get('http://10.42.206.52:3344/books')
       .then((response) => {
         this.knjige = response.data
       })

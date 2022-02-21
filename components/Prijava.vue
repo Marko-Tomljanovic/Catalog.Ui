@@ -85,7 +85,6 @@ export default {
         )
         .then((res) => {
           localStorage.setItem('token', res.data.token)
-          localStorage.setItem('user', this.email)
           this.empty()
           window.location.reload(true)
         })

@@ -7,7 +7,7 @@
         <b-col cols="11">
           <b-card title="Prikaz">
             <template #header>
-              <h6 class="mb-0">Dodane knjige</h6>
+              <h6 class="mb-0">Dodane knjige od {{ store.user }}</h6>
             </template>
             <b-form @submit.prevent="onSubmit">
               <div class="row mx-auto">
@@ -52,7 +52,7 @@ export default {
   },
   mounted() {
     axios
-      .get('http://10.42.206.52:3344/books', {
+      .get(`http://10.42.206.52:3344/getByEmail?email=${store.user}`, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
