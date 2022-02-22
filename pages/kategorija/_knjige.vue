@@ -4,15 +4,25 @@
       <b-spinner style="width: 3rem; height: 3rem" variant="info"></b-spinner>
     </div>
     <div v-if="knjige">
-      <b-form-input
-        id="trazi"
-        v-model="store.trazi"
-        placeholder="Pretraži.."
-        class="col-8 mx-auto mt-3 mb-3"
-        autocomplete="off"
-        type="search"
-      >
-      </b-form-input>
+      <b-row class="mt-3">
+        <b-col></b-col>
+        <b-col cols="8"
+          ><b-form-input
+            id="trazi"
+            v-model="store.trazi"
+            placeholder="Pretraži.."
+            class="col-7 mx-auto mb-3"
+            autocomplete="off"
+            type="search"
+          >
+          </b-form-input
+        ></b-col>
+        <b-col cols="2"
+          ><b-button pill variant="info" class="col" @click="$router.back()">
+            BACK</b-button
+          ></b-col
+        >
+      </b-row>
 
       <div class="row mx-auto">
         <Knjiga
@@ -20,7 +30,7 @@
           v-for="(card, idx) in pretrazi"
           :key="idx"
           :naslov="card.naslov"
-          :url="`profil/` + card.naslov.replace(/\s/g, '').toLowerCase()"
+          :url="`profil/` + card.id"
           :slika="card.image"
         ></Knjiga>
       </div>
@@ -47,6 +57,7 @@
         <b-col></b-col>
       </b-row>
     </div>
+    {{ pretrazi }}
   </div>
 </template>
 

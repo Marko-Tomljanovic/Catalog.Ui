@@ -6,9 +6,16 @@
       style="background-color: black"
     >
       <p class="text-right">
-        <NuxtLink style="color: silver" to="/korisnik">
+        <NuxtLink id="korisnik" style="color: silver" to="/korisnik">
           KORISNIK : {{ store.user }}</NuxtLink
         >
+        <b-tooltip
+          v-if="$route.fullPath != '/korisnik'"
+          target="korisnik"
+          triggers="hover"
+        >
+          Pogledaj svoj <b>profil</b> gdje se nalaze tvoje knjige
+        </b-tooltip>
       </p>
     </div>
     <Nuxt />
@@ -34,7 +41,7 @@ export default {
         },
       })
       .then((response) => {
-        // console.log(response.data.user.email)
+        // console.log(response.data.user)
         this.store.isLoggedIn = response.data.isValid
         this.store.user = response.data.user.email
       })
