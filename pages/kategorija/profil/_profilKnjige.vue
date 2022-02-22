@@ -6,7 +6,7 @@
           <div class="col-md-5">
             <div class="profile-img">
               <img
-                :src="`http://10.42.206.52:3344${knjigaProfila.image}`"
+                :src="`http://10.42.206.52:3344${knjige.image}`"
                 alt="knjiga"
               />
             </div>
@@ -14,8 +14,8 @@
 
           <div class="col-md">
             <div class="profile-head">
-              <h5>{{ knjigaProfila.naslov }}</h5>
-              <h6>{{ knjigaProfila.kategorija }}</h6>
+              <h5>{{ knjige.naslov }}</h5>
+              <h6>{{ knjige.kategorija }}</h6>
               <p class="proile-rating">
                 OCJENA PRODAVAČA : <span>(u izradi)</span>
               </p>
@@ -44,7 +44,7 @@
                         <label>Naziv knjige</label>
                       </div>
                       <div class="col-md-6">
-                        <p>{{ knjigaProfila.naslov }}</p>
+                        <p>{{ knjige.naslov }}</p>
                       </div>
                     </div>
                     <div class="row">
@@ -52,7 +52,7 @@
                         <label>Stanje</label>
                       </div>
                       <div class="col-md-6">
-                        <p>{{ knjigaProfila.stanje }}</p>
+                        <p>{{ knjige.stanje }}</p>
                       </div>
                     </div>
                     <div class="row">
@@ -60,7 +60,7 @@
                         <label>Cijena</label>
                       </div>
                       <div class="col-md-6">
-                        <p>{{ knjigaProfila.cijena }} KN</p>
+                        <p>{{ knjige.cijena }} KN</p>
                       </div>
                     </div>
                     <div class="row">
@@ -68,7 +68,7 @@
                         <label>Prodavač</label>
                       </div>
                       <div class="col-md-6">
-                        <p>(u izradi)</p>
+                        <p>{{ knjige.user }}</p>
                       </div>
                     </div>
                     <div class="row">
@@ -84,7 +84,7 @@
                         <label>Objavljeno</label>
                       </div>
                       <div class="col-md-6">
-                        <p>{{ knjigaProfila.created_at }}</p>
+                        <p>{{ knjige.created_at }}</p>
                       </div>
                     </div>
                   </div>
@@ -129,29 +129,31 @@
 
 <script>
 import axios from 'axios'
+import store from '@/store/store'
 
 export default {
   name: 'profil',
   data() {
     return {
       knjige: null,
+      store,
     }
   },
   computed: {
     samoNaslovi() {
       return this.knjige.map((a) => a.naslov.replace(/\s/g, '').toLowerCase())
     },
-    knjigaProfila() {
-      return this.knjige.find(
-        ({ naslov }) =>
-          naslov.replace(/\s/g, '').toLowerCase() ===
-          this.$route.params.profilKnjige
-      )
-    },
+    // knjigaProfila() {
+    //   return this.knjige.find(
+    //     ({ naslov }) =>
+    //       naslov.replace(/\s/g, '').toLowerCase() ===
+    //       this.$route.params.profilKnjige
+    //   )
+    // },
   },
   mounted() {
     axios
-      .get('http://10.42.206.52:3344/books')
+      .get(`http://10.42.206.52:3344/books/${this.$route.params.profilKnjige}`)
       .then((response) => {
         this.knjige = response.data
       })
