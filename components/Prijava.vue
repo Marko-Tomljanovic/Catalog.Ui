@@ -15,7 +15,7 @@
           type="email"
           id="email"
           v-model="email"
-          placeholder="email adrasa"
+          placeholder="email ili korisnicko ime"
           required
         ></b-form-input>
         <b-form-input
@@ -48,8 +48,8 @@
       </b-button>
       <b-button type="button" size="sm" variant="info" @click="empty">
         ODUSTANI
-      </b-button></template
-    >
+      </b-button>
+    </template>
   </b-modal>
 </template>
 
@@ -76,7 +76,7 @@ export default {
     prijava() {
       axios
         .post(
-          'http://10.42.206.52:3344/login',
+          'http://10.42.206.52:3333/login',
           { email: this.email, password: this.password },
           {
             'Content-Type': 'application/json;charset=UTF-8',

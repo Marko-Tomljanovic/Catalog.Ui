@@ -57,7 +57,6 @@
         <b-col></b-col>
       </b-row>
     </div>
-    {{ pretrazi }}
   </div>
 </template>
 
@@ -85,7 +84,7 @@ export default {
   },
   mounted() {
     axios
-      .get('http://10.42.206.52:3344/books')
+      .get('http://10.42.206.52:3333/books')
       .then((response) => {
         this.knjige = response.data.filter(
           (item) =>

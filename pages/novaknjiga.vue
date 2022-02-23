@@ -168,14 +168,14 @@ export default {
       event.preventDefault()
       axios
         .post(
-          'http://10.42.206.52:3344/books',
+          'http://10.42.206.52:3333/books',
           {
             naslov: this.nazivKnjige,
             opis: this.opis,
             cijena: this.cijena,
             stanje: this.kategorije.selected,
             kategorija: JSON.stringify(this.kategorije.odabirSelected),
-            user: store.user,
+            user: store.user.email,
           },
           {
             headers: {
@@ -193,7 +193,7 @@ export default {
           console.log(formData.append('image', file))
           axios
             .post(
-              'http://10.42.206.52:3344/uploadImage/' + response.data,
+              'http://10.42.206.52:3333/uploadImage/' + response.data,
 
               formData,
               {
@@ -224,7 +224,7 @@ export default {
   },
   mounted() {
     axios
-      .get('http://10.42.206.52:3344/books', {
+      .get('http://10.42.206.52:3333/books', {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },

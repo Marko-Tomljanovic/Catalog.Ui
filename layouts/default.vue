@@ -6,15 +6,22 @@
       style="background-color: black"
     >
       <p class="text-right">
-        <NuxtLink id="korisnik" style="color: silver" to="/korisnik">
-          KORISNIK : {{ store.user }}</NuxtLink
+        <NuxtLink class="pr-5" id="poruke" style="color: silver" to="/poruke">
+          <b> PORUKE</b></NuxtLink
         >
+        <NuxtLink id="korisnik" style="color: silver" to="/korisnik">
+          <b> KORISNIK :</b> {{ store.user.username }}</NuxtLink
+        >
+
         <b-tooltip
           v-if="$route.fullPath != '/korisnik'"
           target="korisnik"
           triggers="hover"
         >
           Pogledaj svoj <b>profil</b> gdje se nalaze tvoje knjige
+        </b-tooltip>
+        <b-tooltip target="poruke" triggers="hover">
+          Pogledaj nove poruke
         </b-tooltip>
       </p>
     </div>
@@ -35,7 +42,7 @@ export default {
 
   mounted() {
     axios
-      .get('http://10.42.206.52:3344/check', {
+      .get('http://10.42.206.52:3333/check', {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
@@ -43,7 +50,7 @@ export default {
       .then((response) => {
         // console.log(response.data.user)
         this.store.isLoggedIn = response.data.isValid
-        this.store.user = response.data.user.email
+        this.store.user = response.data.user
       })
       .catch((error) => {
         console.log(error)
