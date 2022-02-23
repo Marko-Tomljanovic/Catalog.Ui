@@ -62,7 +62,7 @@ export default {
     odjava() {
       axios
         .post(
-          'http://10.42.206.52:3344/logout',
+          'http://10.42.206.52:3333/logout',
           {},
           {
             headers: {

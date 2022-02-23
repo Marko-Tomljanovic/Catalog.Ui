@@ -13,6 +13,29 @@
               <h6 class="mb-0">Knjigoteka</h6>
             </template>
             <b-form @submit.prevent="onSubmit">
+              <b-form-group
+                id="korisnicko_ime"
+                label="Korisničko ime"
+                label-for="korisnicko_ime"
+              >
+                <b-form-input
+                  id="korisnicko_ime"
+                  v-model="korisnicko_ime"
+                  type="text"
+                  placeholder="usename"
+                  required
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group id="input-group-1" label="Grad" label-for="grad">
+                <b-form-input
+                  style="text-transform: capitalize"
+                  id="grad"
+                  v-model="grad"
+                  type="text"
+                  placeholder="npr Zagreb"
+                  required
+                ></b-form-input>
+              </b-form-group>
               <b-form-group id="input-group-1" label="Email" label-for="email">
                 <b-form-input
                   id="input-1"
@@ -70,6 +93,8 @@ export default {
   name: 'registracija',
   data() {
     return {
+      grad: '',
+      korisnicko_ime: '',
       email: '',
       password: '',
       passwordConfirmation: '',
@@ -80,8 +105,10 @@ export default {
     onSubmit() {
       axios
         .post(
-          'http://10.42.206.52:3344/register',
+          'http://10.42.206.52:3333/register',
           {
+            username: this.korisnicko_ime,
+            city: this.grad,
             email: this.email,
             password: this.password,
             password_confirmation: this.passwordConfirmation,

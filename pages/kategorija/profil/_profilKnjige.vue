@@ -6,7 +6,7 @@
           <div class="col-md-5">
             <div class="profile-img">
               <img
-                :src="`http://10.42.206.52:3344${knjige.image}`"
+                :src="`http://10.42.206.52:3333${knjige.image}`"
                 alt="knjiga"
               />
             </div>
@@ -76,7 +76,7 @@
                         <label>Grad</label>
                       </div>
                       <div class="col-md-6">
-                        <p>(u izradi)</p>
+                        <p>{{ store.user.city }}</p>
                       </div>
                     </div>
                     <div class="row">
@@ -153,7 +153,7 @@ export default {
   },
   mounted() {
     axios
-      .get(`http://10.42.206.52:3344/books/${this.$route.params.profilKnjige}`)
+      .get(`http://10.42.206.52:3333/books/${this.$route.params.profilKnjige}`)
       .then((response) => {
         this.knjige = response.data
       })

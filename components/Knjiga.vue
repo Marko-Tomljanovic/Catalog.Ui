@@ -1,7 +1,7 @@
 <template>
   <NuxtLink :to="url">
     <b-card
-      :img-src="`http://10.42.206.52:3344${slika}`"
+      :img-src="`http://10.42.206.52:3333${slika}`"
       img-top
       class="mb-2 mt-3 shadowH"
       style="max-width: 200px"
