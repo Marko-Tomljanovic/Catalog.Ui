@@ -54,8 +54,8 @@
           ></b-overlay>
           <b-button @click="$router.back()" class="mt-4 col">POVRATAK</b-button>
         </b-col>
-        <b-col></b-col>
-      </b-row>
+        <b-col></b-col> </b-row
+      >{{ knjige }}
     </div>
   </div>
 </template>
@@ -84,8 +84,9 @@ export default {
   },
   mounted() {
     axios
-      .get('http://10.42.206.52:3333/books')
+      .get('http://127.0.0.1:3333/books')
       .then((response) => {
+        console.log(response)
         this.knjige = response.data.filter(
           (item) =>
             item.kategorija

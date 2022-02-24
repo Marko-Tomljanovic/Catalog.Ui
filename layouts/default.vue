@@ -42,7 +42,7 @@ export default {
 
   mounted() {
     axios
-      .get('http://10.42.206.52:3333/check', {
+      .get('http://127.0.0.1:3333/check', {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },

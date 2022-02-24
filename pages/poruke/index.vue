@@ -53,7 +53,7 @@ export default {
   mounted() {
     setTimeout(() => {
       axios
-        .get(`http://10.42.206.52:3333/getByEmail?email=${store.user.email}`, {
+        .get(`http://127.0.0.1:3333/getByEmail?email=${store.user.email}`, {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token'),
           },

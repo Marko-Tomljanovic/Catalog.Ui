@@ -137,6 +137,7 @@
               </div>
             </div>
           </div>
+          {{ knjige }}
         </b-form>
       </div>
     </div>
@@ -168,7 +169,7 @@ export default {
       event.preventDefault()
       axios
         .post(
-          'http://10.42.206.52:3333/books',
+          'http://127.0.0.1:3333/books',
           {
             naslov: this.nazivKnjige,
             opis: this.opis,
@@ -193,7 +194,7 @@ export default {
           console.log(formData.append('image', file))
           axios
             .post(
-              'http://10.42.206.52:3333/uploadImage/' + response.data,
+              'http://127.0.0.1:3333/uploadImage/' + response.data,
 
               formData,
               {
@@ -224,7 +225,7 @@ export default {
   },
   mounted() {
     axios
-      .get('http://10.42.206.52:3333/books', {
+      .get('http://127.0.0.1:3333/books', {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
