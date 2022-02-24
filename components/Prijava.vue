@@ -76,7 +76,7 @@ export default {
     prijava() {
       axios
         .post(
-          'http://10.42.206.52:3333/login',
+          'http://127.0.0.1:3333/login',
           { email: this.email, password: this.password },
           {
             'Content-Type': 'application/json;charset=UTF-8',

@@ -105,7 +105,7 @@ export default {
     onSubmit() {
       axios
         .post(
-          'http://10.42.206.52:3333/register',
+          'http://127.0.0.1:3333/register',
           {
             username: this.korisnicko_ime,
             city: this.grad,
